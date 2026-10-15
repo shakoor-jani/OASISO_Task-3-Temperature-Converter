@@ -1,0 +1,299 @@
+/* ===== 1. Base / Reset ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== 2. Colour Palette (CSS Variables) ===== */
+:root {
+  --bg-dark: #0a1128;
+  --bg-card: #101c3d;
+  --bg-field: #0b1533;
+  --border: #243566;
+  --text-main: #f1f5f9;
+  --text-muted: #a8b5d1;
+  --cyan: #22d3ee;
+  --cyan-dark: #06b6d4;
+  --error-bg: rgba(248, 113, 113, 0.12);
+  --error-text: #fca5a5;
+  --success-bg: rgba(52, 211, 153, 0.12);
+  --success-text: #6ee7b7;
+  --radius: 14px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font);
+  background: radial-gradient(circle at top, #14214a 0%, var(--bg-dark) 60%);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ===== 3. Layout ===== */
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.converter-card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-size: 1.6rem;
+  color: var(--cyan);
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* ===== 4. Form Fields ===== */
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--text-main);
+  background: var(--bg-field);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input::placeholder {
+  color: #6b7aa0;
+}
+
+input:hover,
+select:hover {
+  border-color: var(--cyan-dark);
+}
+
+input[aria-invalid="true"] {
+  border-color: #f87171;
+}
+
+/* Custom dropdown arrow */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%2322d3ee' stroke-width='2' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+select option {
+  background: var(--bg-card);
+  color: var(--text-main);
+}
+
+/* Visible keyboard focus */
+input:focus-visible,
+select:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+/* ===== 5. Messages ===== */
+.message {
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.92rem;
+  margin-bottom: 16px;
+}
+
+.message:empty {
+  display: none;
+}
+
+.message--error {
+  background: var(--error-bg);
+  color: var(--error-text);
+  border: 1px solid #f87171;
+}
+
+.message--success {
+  background: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid #34d399;
+}
+
+/* ===== 6. Buttons ===== */
+.button-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn {
+  width: 100%;
+  padding: 13px 18px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: transform 0.15s ease, background 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--cyan), var(--cyan-dark));
+  color: #04122b;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(34, 211, 238, 0.35);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-main);
+  border-color: var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ===== 7. Results ===== */
+.results {
+  margin-top: 28px;
+}
+
+.results h2 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: var(--text-muted);
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-field);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--cyan);
+  border-radius: 10px;
+  padding: 14px 16px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.result-item:hover {
+  transform: translateX(4px);
+  border-color: var(--cyan);
+}
+
+.result-label {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.result-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--cyan);
+  word-break: break-all;
+  text-align: right;
+}
+
+/* ===== 8. Footer ===== */
+.card-footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ===== 9. Responsive (mobile-first) ===== */
+@media (min-width: 600px) {
+  .converter-card {
+    padding: 36px 32px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .button-row {
+    flex-direction: row;
+  }
+
+  .btn-primary {
+    flex: 2;
+  }
+
+  .btn-secondary {
+    flex: 1;
+  }
+}
+
+@media (min-width: 900px) {
+  .converter-card {
+    max-width: 520px;
+  }
+}
+
+/* ===== 10. Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .btn:hover,
+  .result-item:hover {
+    transform: none;
+  }
+}
